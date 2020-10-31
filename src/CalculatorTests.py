@@ -22,18 +22,24 @@ class MyTestCase(unittest.TestCase):
     def test_add_method_calculator(self):
 
         filepath = './src/Unit Test Addition.csv'
-        file_data = self.datafile.csv(filepath)
-        pprint(file_data)
-        for row in file_data:
+        csv_data = self.datafile.csv(filepath)
+        for row in csv_data:
             self.assertEqual(self.calculator.add(row['Value 1'], row['Value 2']), int(row['Result']))
-        file_data.clear()
+        csv_data.clear()
 
     def test_subtraction_method_calculator(self):
         filepath = './src/Unit Test Subtraction.csv'
-        file_data = self.datafile.csv(filepath)
-        for row in file_data:
+        csv_data = self.datafile.csv(filepath)
+        for row in csv_data:
             self.assertEqual(self.calculator.subtract(row['Value 1'], row['Value 2']), int(row['Result']))
-        file_data.clear()
+        csv_data.clear()
+
+    def test_multiplication_method_calculator(self):
+        filepath = './src/Unit Test Multiplication.csv'
+        csv_data = self.datafile.csv(filepath)
+        for row in csv_data:
+            self.assertEqual(self.calculator.multiply(row['Value 1'], row['Value 2']), int(row['Result']))
+        csv_data.clear()
 
 
 if __name__ == '__main__':
