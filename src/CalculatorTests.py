@@ -1,10 +1,12 @@
 import unittest
-from Calculator import Calculator, addition
+from Calculator import Calculator
+from CsvReader import CsvReader
+from pprint import pprint
 
 class MyTestCase(unittest.TestCase):
     def setUp(self) -> None:
         self.calculator = Calculator()
-
+        self.datafile = CsvReader()
 
     def test_instantiate_calculator(self):
 
@@ -14,15 +16,25 @@ class MyTestCase(unittest.TestCase):
 
         self.assertEqual(self.calculator.result, 0)
 
+    def test_instantiate_parser(self):
+        self.assertIsInstance(self.datafile, CsvReader)
+
     def test_add_method_calculator(self):
 
-        self.assertEqual(self.calculator.add(2, 2), 4)
-        self.assertEqual(self.calculator.result, 4)
+        filepath = './src/Unit Test Addition.csv'
+        file_data = self.datafile.csv(filepath)
+        pprint(file_data)
+        for row in file_data:
+            self.assertEqual(self.calculator.add(row['Value 1'], row['Value 2']), int(row['Result']))
+        file_data.clear()
 
-    def test_subtract_method_calculator(self):
+    def test_subtraction_method_calculator(self):
+        filepath = './src/Unit Test Subtraction.csv'
+        file_data = self.datafile.csv(filepath)
+        for row in file_data:
+            self.assertEqual(self.calculator.subtract(row['Value 1'], row['Value 2']), int(row['Result']))
+        file_data.clear()
 
-        self.assertEqual(self.calculator.subtract(2, 2), 0)
-        self.assertEqual(self.calculator.result, 0)
 
 if __name__ == '__main__':
     unittest.main()
