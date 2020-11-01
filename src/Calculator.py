@@ -1,3 +1,5 @@
+import math
+
 def addition(a, b):
     a = int(a)
     b = int(b)
@@ -27,6 +29,9 @@ def squared(a):
     b = a * a
     return b
 
+def square_root(a):
+        return round(math.sqrt(float(a)), 9)
+
 class Calculator:
     result = 0
 
@@ -52,4 +57,8 @@ class Calculator:
 
     def square(self,a):
         self.result = squared(a)
+        return self.result
+
+    def square_root(self,a):
+        self.result = square_root(a);
         return self.result
